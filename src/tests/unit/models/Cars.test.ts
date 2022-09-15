@@ -13,7 +13,9 @@ describe('Cars Model', () => {
     sinon.stub(Model, 'create').resolves(carMockWithId);
     sinon.stub(Model, 'find').resolves([carMockWithId]);
     sinon.stub(Model, 'findOne').resolves(carMockWithId);
-    sinon.stub(Model, 'findByIdAndUpdate').resolves(carMockUpdateWithId);
+    sinon.stub(Model, 'findByIdAndUpdate')
+    .onCall(0).resolves(carMockUpdateWithId)
+    .onCall(1).resolves(null);
     sinon.stub(Model, 'findByIdAndDelete').resolves();
   });
 
@@ -58,6 +60,13 @@ describe('Cars Model', () => {
         expect(carChanged).to.be.deep.equal(carMockUpdateWithId);
     });
 
+    it('no successfully changed', async () => {
+        const carChanged = await carModel.
+        update('6323378c1efc1d4f7d4acac3', carMockUpdate);
+
+        expect(carChanged).to.be.null;
+    });
+
     it('_id not found to change', async () => {
         try {
             await carModel.update('123IdErrado', carMockUpdate);
@@ -70,7 +79,7 @@ describe('Cars Model', () => {
    describe('deleting a car', () => {
     it('successfully deleted', async () => {
         const deletedCar = await carModel.delete('6323378c1efc1d4f7d4acad4');
-        expect(deletedCar).to.be.true;
+        expect(deletedCar).to.be.undefined;
     });
 
     it('_id not found to delete', async () => {
