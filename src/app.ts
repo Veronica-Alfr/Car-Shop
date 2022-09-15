@@ -1,4 +1,5 @@
 import express from 'express';
+import 'express-async-errors';
 import carsRoute from './routes/Car';
 import errorHandler from './middlewares/error';
 

@@ -14,7 +14,7 @@ export default class CarsService implements IService<ICar> {
 
     const created = await this._car.create(parsed.data);
 
-    return created as ICar & { _id: string };
+    return created as { _id: string } & ICar;
   }
 
   public async read():Promise<ICar[]> {
