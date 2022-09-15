@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import * as chai from 'chai';
+import chai from 'chai';
 const { expect } = chai;
 import Cars from '../../../models/Cars';
 import { Model } from 'mongoose';
@@ -11,8 +11,10 @@ describe('Cars Model', () => {
 
   before(async () => {
     sinon.stub(Model, 'create').resolves(carMockWithId);
+    sinon.stub(Model, 'find').resolves([carMockWithId]);
     sinon.stub(Model, 'findOne').resolves(carMockWithId);
     sinon.stub(Model, 'findByIdAndUpdate').resolves(carMockUpdateWithId);
+    sinon.stub(Model, 'findByIdAndDelete').resolves();
   });
 
   after(()=>{
