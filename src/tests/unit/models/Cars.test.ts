@@ -70,11 +70,8 @@ describe('Cars Model', () => {
     });
 
     it('_id not found to change', async () => {
-        try {
-            await carModel.update('123IdErrado', carMockUpdate);
-        } catch (error:any) {
-            expect(error.message).to.be.eq(ErrorTypes.InvalidMongoId);
-        }
+        expect(carModel.update('123IdErrado', carMockUpdate)).to.eventually.be
+        .rejectedWith(ErrorTypes.InvalidMongoId);
     });
    });
 
@@ -85,11 +82,8 @@ describe('Cars Model', () => {
     });
 
     it('_id not found to delete', async () => {
-        try {
-            await carModel.delete('123IdErrado');
-        } catch (error:any) {
-            expect(error.message).to.be.eq(ErrorTypes.InvalidMongoId);
-        }
+        expect(carModel.delete('123IdErrado')).to.eventually.be
+        .rejectedWith(ErrorTypes.InvalidMongoId);
     });
    });
 });
