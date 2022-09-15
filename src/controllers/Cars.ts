@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { IService } from '../interfaces/IService';
-import { ICar }from '../interfaces/ICar';
+import { ICar } from '../interfaces/ICar';
 
 export default class CarsController {
   constructor(private _service: IService<ICar>) { }
@@ -37,5 +37,5 @@ export default class CarsController {
     await this._service.delete(id);
 
     return res.sendStatus(204);
- }
+  }
 }

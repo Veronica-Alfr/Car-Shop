@@ -29,7 +29,7 @@ export default class CarsService implements IService<ICar> {
     const cars = await this._car.read();
 
     return cars;
-}
+  }
 
   public async update(_id: string, payload: unknown):Promise<ICar & { _id: string; }> {
     const parsed = CarZodSchema.safeParse(payload);
