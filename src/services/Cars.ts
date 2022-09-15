@@ -17,18 +17,18 @@ export default class CarsService implements IService<ICar> {
     return created as ICar & { _id: string };
   }
 
+  public async read():Promise<ICar[]> {
+    const cars = await this._car.read();
+
+    return cars;
+  }
+
   public async readOne(_id:string):Promise<ICar> {
     const car = await this._car.readOne(_id);
 
     if (!car) throw new Error(ErrorTypes.ObjectNotFound);
 
     return car;
-  }
-
-  public async read():Promise<ICar[]> {
-    const cars = await this._car.read();
-
-    return cars;
   }
 
   public async update(_id: string, payload: unknown):Promise<ICar & { _id: string; }> {
