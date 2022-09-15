@@ -88,7 +88,7 @@ describe('Cars Service', () => {
         const updated = await carService.update("6323378c1efc1d4f7d4acad4", carMock);
 
         expect(updated).to.be.deep.eq(carMockWithId);
-    })
+    });
 
     it('Failure - Not Found', async () => {
         let err: any;
@@ -101,7 +101,7 @@ describe('Cars Service', () => {
 
         expect(err, 'error should be defined').not.to.be.undefined;
         expect(err.message).to.be.eq(ErrorTypes.ObjectNotFound);
-    })
+    });
 
     it('Failure - Zod Fails', async () => {
         let err: any;
@@ -114,7 +114,7 @@ describe('Cars Service', () => {
 
         expect(err, 'error should be defined').not.to.be.undefined;
         expect(err).to.be.instanceOf(ZodError);
-    })
+      });
     });
 
     describe('Delete Car', () => {
@@ -135,6 +135,6 @@ describe('Cars Service', () => {
     
             expect(err, 'error should be defined').not.to.be.undefined;
             expect(err.message).to.be.eq(ErrorTypes.ObjectNotFound);
-        })
+        });
     });
 });
