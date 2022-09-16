@@ -41,9 +41,6 @@ describe('Cars Service', () => {
     it('Failure', async () => {
         let err: any;
 
-        // expect(carService.create({})).to.eventually.be
-        // .rejectedWith(ZodError);
-
         try {
             await carService.create({});
         } catch (error) {

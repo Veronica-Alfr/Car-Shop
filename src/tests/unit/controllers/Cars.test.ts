@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Sinon, * as sinon from 'sinon';
+import * as sinon from 'sinon';
 import chai from 'chai';
 const { expect } = chai;
 import Cars from '../../../models/Cars';
@@ -20,10 +20,11 @@ describe('Cars Controller', () => {
       sinon.stub(carModel, 'read').resolves([carMockWithId]);
       sinon.stub(carService, 'readOne').resolves(carMock);
       sinon.stub(carService, 'update').resolves(carMockUpdateWithId);
-      sinon.stub(carService, 'delete').resolves();
+      sinon.stub(carService, 'delete').resolves(carMockWithId);
   
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns(res);
+      res.sendStatus = sinon.stub().returns(res);
     });
   
     after(() => {
@@ -80,10 +81,8 @@ describe('Cars Controller', () => {
           req.params = { id: carMockWithId._id };
 
           await carController.delete(req, res);
-
-        //   expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
     
-          expect((res.sendStatus as Sinon.SinonStub).calledWith(204)).to.be.true;
+          expect((res.sendStatus as sinon.SinonStub).calledWith(204)).to.be.true;
         });
       });
 });
